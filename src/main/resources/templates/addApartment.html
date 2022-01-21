@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Apartment</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div class="content">
+    <a class="btn" href="../static/index.html">Головна сторінка</a>
+    <form action="#" th:action="@{/saveApartment}" th:object="${command}" method="post">
+        <p>Name: <input type="text" th:field="*{name}" /></p>
+        <p>Keywords: <input type="text" th:field="*{keywordsInString}" /></p>
+        <textarea th:field="*{description}" cols="150" rows="15" placeholder="Основна інформація"></textarea>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+<!--        <input type="text" name="naming" placeholder="Заголовок" size="150"/>-->
+<!--        <input type="text" name="keywords" placeholder="Параметри (через кому)" size="150"/>-->
+<!--        <textarea name="description" cols="150" rows="15" placeholder="Основна інформація"></textarea>-->
+<!--        <input type="submit" value="Додати"/>-->
+    </form>
+</div>
+</body>
+</html>
