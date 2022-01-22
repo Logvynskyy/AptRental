@@ -13,7 +13,10 @@
             <p class="info">Параметри - <span th:utext="${apt.getKeywordsInString()}"></span></p>
             <p class="info">Опис - <span th:utext="${apt.getDescription()}"></span></p>
             <a th:href="@{'/apartment/edit/' + ${apt.id}}">Редагувати</a> <!-- Потом сделать видимым только если авторизован-->
-            <a th:href="@{'/apartment/delete/' + ${apt.id}}">Видалити</a>
+            <form th:method="DELETE" th:action="@{'/apartment/' + ${apt.id}}">
+                <input type="submit" value="Видалити">
+            </form>
+<!--            <a th:href="@{'/apartment/delete/' + ${apt.id}}">Видалити</a>-->
         <!--    <jstl:choose>-->
         <!--        <jstl:when test="${not empty sessionScope.user}">-->
         <!--            <form method="post" action="controller?do=editBlank">-->

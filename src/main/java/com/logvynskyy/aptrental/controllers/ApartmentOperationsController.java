@@ -1,24 +1,48 @@
 package com.logvynskyy.aptrental.controllers;
 
 import com.logvynskyy.aptrental.beans.Apartment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.logvynskyy.aptrental.dao.ApartmentDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-//@RequestMapping("/apartment")
+@RequestMapping("/apartment")
 public class ApartmentOperationsController {
+    private final ApartmentDAO apartmentDAO;
 
-//    @GetMapping("/{id}") //TODO когда будет рабочее соединение с БД тогда сделаю этот контроллер отдельно
-//    public ModelAndView getApartment(@PathVariable int id){
-//        ModelAndView modelAndView = new ModelAndView("apartment");
-//        for (Apartment apartment : apartmentList) {
-//            if (apartment.getId() == id) {
-//                modelAndView.addObject("apt", apartment);
-//            }
-//        }
-//        return modelAndView;
-//    }
+    @Autowired
+    public ApartmentOperationsController(ApartmentDAO apartmentDAO) {
+        this.apartmentDAO = apartmentDAO;
+    }
+
+    @GetMapping("/{id}")
+    public ModelAndView getApartment(@PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView("apartment");
+        modelAndView.addObject("apt", apartmentDAO.getApartment(id));
+
+        return modelAndView;
+    }
+
+    @GetMapping("edit/{id}")
+    public ModelAndView editApartment(@PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView("editApartment", "apartment", apartmentDAO.getApartment(id));
+        modelAndView.addObject("apt", apartmentDAO.getApartment(id));
+
+        return modelAndView;
+    }
+
+    @PatchMapping("/{id}")
+    public ModelAndView updateApartment(@ModelAttribute Apartment apartment, @PathVariable int id){
+        apartmentDAO.editApartment(id, apartment);
+
+        return new ModelAndView("redirect:/main");
+    }
+
+    @DeleteMapping("/{id}")
+    public ModelAndView deleteApartment(@PathVariable int id){
+        apartmentDAO.deleteApartment(id);
+
+        return new ModelAndView("redirect:/main");
+    }
 }

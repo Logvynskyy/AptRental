@@ -8,7 +8,7 @@
     <body>
         <div class="content">
             <a class="btn" href="/main">Головна сторінка</a>
-            <form action="#" th:action="@{/saveApartment}" th:object="${command}" method="post">
+            <form action="#" th:action="@{/saveApartment}" th:object="${apartment}" method="post">
                 <p>Name: <input type="text" th:field="*{name}" /></p>
                 <p>Keywords: <input type="text" th:field="*{keywordsInString}" /></p>
                 <p>Description: <textarea th:field="*{description}" cols="150" rows="15" placeholder="Основна інформація"></textarea>

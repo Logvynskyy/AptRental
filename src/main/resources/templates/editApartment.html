@@ -8,7 +8,7 @@
     <body>
         <div class="content">
             <a class="btn" href="/main">Головна сторінка</a>
-            <form action="#" th:action="@{/saveApartment}" th:object="${command}" method="post">
+            <form th:method="PATCH" th:action="@{'/apartment/' + ${apt.id}}" th:object="${apartment}">
                 <p>Name: <input type="text" name="newName" th:value="*{getName()}" th:field="*{name}"
                                 placeholder="Заголовок" size="150 "/></p>
                 <p>Keywords: <input type="text" name="newKeywords" th:value="*{getKeywordsInString()}"
