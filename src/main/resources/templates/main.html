@@ -35,7 +35,7 @@
 <!--    </jstl:choose>-->
         <p>Список ваших квартир</p>
         <div th:each="apt: ${list}">
-            <p><a href="controller?do=blank&naming=${blank.naming}"><span th:utext="${apt.getName()}"></span></a></p>
+            <p><a th:href="@{'/apartment/' + ${apt.id}}"><span th:utext="${apt.getName()}"></span></a></p>
         </div>
         <a href="/addApartment" class="red">Add new apartment</a>
     </div>

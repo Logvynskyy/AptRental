@@ -4,6 +4,7 @@ import java.util.HashSet;
 
 public class Apartment {
 //    private User owner;
+    private int id;
     private String name;
     private String description;
     private String keywordsInString;
@@ -13,11 +14,20 @@ public class Apartment {
         super();
     }
 
-    public Apartment(String name, String description, String keywordsInString, HashSet<String> keywords) {
+    public Apartment(int id, String name, String description, String keywordsInString, HashSet<String> keywords) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.keywordsInString = keywordsInString;
         this.keywords = keywords;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     //    public User getOwner() {

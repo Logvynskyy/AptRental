@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Apartment</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    </head>
+    <body>
+        <div class="content">
+            <a class="btn" href="/main">Головна сторінка</a>
+            <p class="info">Інформація про квартиру</p>
+            <p class="info">Назва - <span th:utext="${apt.getName()}"></span></p>
+            <p class="info">Параметри - <span th:utext="${apt.getKeywordsInString()}"></span></p>
+            <p class="info">Опис - <span th:utext="${apt.getDescription()}"></span></p>
+            <a th:href="@{'/apartment/edit/' + ${apt.id}}">Редагувати</a> <!-- Потом сделать видимым только если авторизован-->
+            <a th:href="@{'/apartment/delete/' + ${apt.id}}">Видалити</a>
+        <!--    <jstl:choose>-->
+        <!--        <jstl:when test="${not empty sessionScope.user}">-->
+        <!--            <form method="post" action="controller?do=editBlank">-->
+        <!--                <input type="hidden" name="blank" value="${requestScope.blank.naming}">-->
+        <!--                <input type="submit" value="Редагувати"/>-->
+        <!--            </form>-->
+        <!--            <form method="post" action="controller?do=delete">-->
+        <!--                <input type="hidden" name="blank" value="${requestScope.blank.naming}">-->
+        <!--                <input type="submit" value="Видалити"/>-->
+        <!--            </form>-->
+        <!--            <a class = "red" href="controller?do=main">Повернутися до списку квартир</a>-->
+        <!--        </jstl:when>-->
+        <!--    </jstl:choose>-->
+        </div>
+    </body>
+</html>

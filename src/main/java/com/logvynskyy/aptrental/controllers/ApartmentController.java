@@ -1,10 +1,7 @@
 package com.logvynskyy.aptrental.controllers;
 
 import com.logvynskyy.aptrental.beans.Apartment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -15,6 +12,7 @@ import java.util.List;
 @RestController
 public class ApartmentController {
     private List<Apartment> apartmentList = new ArrayList<>();
+    private static int counter = 0;
 
     @GetMapping("/main")
     public ModelAndView main(){
@@ -33,14 +31,47 @@ public class ApartmentController {
         String[] keywordsArr = apartment.getKeywordsInString().split(", ");
         HashSet<String> keywordSet = new HashSet<>(Arrays.asList(keywordsArr));
 
-//        infoBlank.setOwner(user);
+//        apt.setOwner(user);
         apt.setKeywords(keywordSet);
         apt.setName(apartment.getName());
         apt.setDescription(apartment.getDescription());
 
-        apartmentList.add(new Apartment(apartment.getName(), apartment.getDescription(),
+        apartmentList.add(new Apartment(counter++, apartment.getName(), apartment.getDescription(),
                 apartment.getKeywordsInString(), apartment.getKeywords()));
 
+        return new ModelAndView("redirect:/main");
+    }
+
+    @GetMapping("/apartment/{id}")
+    public ModelAndView getApartment(@PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView("apartment");
+        for (Apartment apartment : apartmentList) {
+            if (apartment.getId() == id) {
+                modelAndView.addObject("apt", apartment);
+            }
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/apartment/edit/{id}")
+    public ModelAndView editApartment(@PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView("editApartment");
+        for(int i = 0; i < apartmentList.size(); i++){
+            if (apartmentList.get(i).getId() == id) {
+                modelAndView = new ModelAndView("editApartment", "command", apartmentList.get(i));
+                apartmentList.remove(i);
+            }
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/apartment/delete/{id}")
+    public ModelAndView deleteApartment(@PathVariable int id){
+        for (int i = 0; i < apartmentList.size(); i++) {
+            if (apartmentList.get(i).getId() == id) {
+                apartmentList.remove(i);
+            }
+        }
         return new ModelAndView("redirect:/main");
     }
 }
