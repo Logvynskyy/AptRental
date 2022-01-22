@@ -2,6 +2,7 @@ package com.logvynskyy.aptrental.controllers;
 
 import com.logvynskyy.aptrental.beans.Apartment;
 import com.logvynskyy.aptrental.dao.ApartmentDAO;
+import com.logvynskyy.aptrental.dao.ImageDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,11 +13,18 @@ import java.util.HashSet;
 @RestController
 public class ApartmentController {
     private final ApartmentDAO apartmentDAO;
+    private final ImageDAO imageDAO;
 
     @Autowired
-    public ApartmentController(ApartmentDAO apartmentDAO) {
+    public ApartmentController(ApartmentDAO apartmentDAO, ImageDAO imageDAO) {
         this.apartmentDAO = apartmentDAO;
+        this.imageDAO = imageDAO;
     }
+
+    @GetMapping()
+    public ModelAndView index(){
+        return new ModelAndView("redirect:/main");
+    } // TODO Убрать при реализации авторизации и регистрации
 
     @GetMapping("/main")
     public ModelAndView main(){
@@ -37,6 +45,7 @@ public class ApartmentController {
 //        apt.setOwner(user);
         apartment.setKeywords(keywordSet);
         apartmentDAO.addApartment(apartment);
+        imageDAO.uploadImage(apartment.getFiles());
 
         return new ModelAndView("redirect:/main");
     }

@@ -1,5 +1,7 @@
 package com.logvynskyy.aptrental.beans;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.HashSet;
 
 public class Apartment {
@@ -9,6 +11,7 @@ public class Apartment {
     private String description;
     private String keywordsInString;
     private HashSet<String> keywords = new HashSet<>();
+    private MultipartFile[] files;
 
     public Apartment() {
         super();
@@ -68,5 +71,13 @@ public class Apartment {
 
     public void setKeywords(HashSet<String> keywords) {
         this.keywords = keywords;
+    }
+
+    public MultipartFile[] getFiles() {
+        return files;
+    }
+
+    public void setFiles(MultipartFile[] files) {
+        this.files = files;
     }
 }

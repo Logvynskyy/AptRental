@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Upload Images</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<!--        <script type="text/javascript" th:src="@{/fileUpload.js}"></script>-->
+    </head>
+    <body>
+        <form method="POST" enctype="multipart/form-data" id="fileUploadForm">
+            Images: <input type="file" multiple name="files"/><br/>
+            <input type="submit" value="Submit" id="submitButton"/>
+        </form>
+    </body>
+</html>
