@@ -21,11 +21,6 @@ public class ApartmentController {
         this.imageDAO = imageDAO;
     }
 
-    @GetMapping()
-    public ModelAndView index(){
-        return new ModelAndView("redirect:/main");
-    } // TODO Убрать при реализации авторизации и регистрации
-
     @GetMapping("/main")
     public ModelAndView main(){
         return new ModelAndView("main", "list", apartmentDAO.getAllApartments());

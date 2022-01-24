@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Main page</title>
@@ -33,11 +34,26 @@
 <!--            </div>-->
 <!--        </jstl:otherwise>-->
 <!--    </jstl:choose>-->
-        <p>Список ваших квартир</p>
-        <div th:each="apt: ${list}">
-            <p><a th:href="@{'/apartment/' + ${apt.id}}"><span th:utext="${apt.getName()}"></span></a></p>
-        </div>
-        <a href="/addApartment" class="red">Add new apartment</a>
+        <sec:authorize access="isAuthenticated()">
+            <p th:inline="text">[[${#httpServletRequest.remoteUser}]],
+                <a href="/logout" class="exit">Вихід</a>
+            </p>
+            <p>Список ваших квартир</p>
+            <div th:each="apt: ${list}">
+                <p><a th:href="@{'/apartment/' + ${apt.id}}"><span th:utext="${apt.getName()}"></span></a></p>
+            </div>
+            <a href="/addApartment" class="red">Add new apartment</a>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+            <form method="post" action="controller?do=search">
+                <input type="text" name="search" placeholder="Введіть параметри"/>
+                <input type="submit" class="btn" value="Пошук"/>
+            </form>
+            <div class="form-text">
+                <a href="/registration" class="form-link">Реєстрація</a>
+                <a href="/login" class="form-link">Вхід</a>
+            </div>
+        </sec:authorize>
     </div>
 </body>
 </html>

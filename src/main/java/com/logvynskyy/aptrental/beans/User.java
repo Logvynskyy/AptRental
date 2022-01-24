@@ -1,10 +1,30 @@
 package com.logvynskyy.aptrental.beans;
 
-import java.util.Objects;
-
 public class User {
+    private int id;
     private String name;
     private String password;
+    private String phoneNumber;
+
+
+    public User() {
+        super();
+    }
+
+    public User(int id, String name, String password, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -22,17 +42,12 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return name.equals(user.name) && password.equals(user.password);
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, password);
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
 
