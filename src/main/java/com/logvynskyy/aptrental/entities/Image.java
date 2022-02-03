@@ -1,4 +1,4 @@
-package com.logvynskyy.aptrental.beans;
+package com.logvynskyy.aptrental.entities;
 
 import org.springframework.web.multipart.MultipartFile;
 

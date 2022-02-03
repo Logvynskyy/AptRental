@@ -1,44 +1,48 @@
 package com.logvynskyy.aptrental.dao;
 
-import com.logvynskyy.aptrental.beans.User;
+import com.logvynskyy.aptrental.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
-public class UserDAO implements UserDetailsService {
-    private List<User> usersList = new ArrayList<>();
-    private static int counter = 0;
+public class UserDAO {
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private JdbcTemplate jdbcTemplate;
 
-    public User getUserByID(int id){
-        return usersList.stream().filter(apartment -> apartment.getId() == id).findAny().orElse(null);
+    public Optional<User> getUserByID(int id){
+        String sql = "SELECT * FROM USERS WHERE ID = " + id;
+
+        List<User> users = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(User.class));
+
+        return Optional.ofNullable(users.get(0));
+//        return usersList.stream().filter(user -> user.getId() == id).findAny();
     }
 
     public User getUserByName(String name){
-        return usersList.stream().filter(apartment -> apartment.getName().equals(name)).findAny().orElse(null);
+        String sql = "SELECT * FROM USERS WHERE NAME = " + name;
+
+        List<User> users = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(User.class));
+
+        return users.get(0);
+//        return usersList.stream().filter(apartment -> apartment.getName().equals(name)).findAny().orElse(null);
     }
 
     public void addUser(User user){
-        user.setId(counter++);
-        usersList.add(user);
+//        user.setId(counter++);
+//        usersList.add(user);
+        String sql = "INSERT INTO USERS(NAME, PASSWORD, PHONE_NUMBER) values (?, ?, ?)";
+
+        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), user.getPhoneNumber());
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = getUserByName(username);
+    public List<User> getAllUsers(){
+        String sql = "SELECT * FROM USERS";
 
-        if (user == null) { 
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        return null;
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(User.class));
     }
 }

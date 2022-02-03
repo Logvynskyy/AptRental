@@ -1,6 +1,6 @@
 package com.logvynskyy.aptrental.dao;
 
-import com.logvynskyy.aptrental.beans.Apartment;
+import com.logvynskyy.aptrental.entities.Apartment;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

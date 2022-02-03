@@ -1,6 +1,6 @@
 package com.logvynskyy.aptrental.controllers;
 
-import com.logvynskyy.aptrental.beans.Apartment;
+import com.logvynskyy.aptrental.entities.Apartment;
 import com.logvynskyy.aptrental.dao.ApartmentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
