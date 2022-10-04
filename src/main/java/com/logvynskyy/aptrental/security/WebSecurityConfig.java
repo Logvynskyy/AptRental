@@ -6,10 +6,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -19,39 +21,39 @@ import javax.annotation.PostConstruct;
 
 @Configuration
 @EnableWebSecurity
-//@ComponentScan("com.logvynskyy.aptrental.security")
+@ComponentScan("com.logvynskyy.aptrental.security")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    final
-    UserService userService;
-
-    public WebSecurityConfig(UserService userService) {
-        this.userService = userService;
-    }
-
+//    final
+//    UserService userService;
+//
+//    public WebSecurityConfig(UserService userService) {
+//        this.userService = userService;
+//    }
+//
 //    public void setUserService(UserService userService) {
 //        this.userService = userService;
 //    }
-//    @Autowired
-//    private CustomAuthenticationProvider authProvider;
-//
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(authProvider);
-//    }
+    @Autowired
+    private AuthenticationProvider authProvider;
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(authProvider);
+    }
 
 //    @Autowired
 //    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
 //    }
 
-//    @Bean
-//    public UserDetailsService userDetailsService(){
-//        return new InMemoryUserDetailsManager(
-//                User.builder().username("user").password(bCryptPasswordEncoder().encode(
-//                        "user123")).roles("USER").build()
-//        );
-//    }
+    @Bean
+    public UserDetailsService userDetailsService(){
+        return new InMemoryUserDetailsManager(
+                User.builder().username("user").password(bCryptPasswordEncoder().encode(
+                        "user123")).roles("USER").build()
+        );
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
