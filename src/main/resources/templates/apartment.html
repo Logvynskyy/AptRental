@@ -7,14 +7,14 @@
     </head>
     <body>
         <div class="content">
-            <a class="btn" href="/main">Головна сторінка</a>
-            <p class="info">Інформація про квартиру</p>
-            <p class="info">Назва - <span th:utext="${apt.getName()}"></span></p>
-            <p class="info">Параметри - <span th:utext="${apt.getKeywordsInString()}"></span></p>
-            <p class="info">Опис - <span th:utext="${apt.getDescription()}"></span></p>
-            <a th:href="@{'/apartment/edit/' + ${apt.id}}">Редагувати</a> <!-- Потом сделать видимым только если авторизован-->
+            <a class="btn" href="/main">Main page</a>
+            <p class="info">Information about apartment</p>
+            <p class="info">Name - <span th:utext="${apt.getName()}"></span></p>
+            <p class="info">Features - <span th:utext="${apt.getKeywordsInString()}"></span></p>
+            <p class="info">Description - <span th:utext="${apt.getDescription()}"></span></p>
+            <a th:href="@{'/apartment/edit/' + ${apt.id}}">Edit</a> <!-- Потом сделать видимым только если авторизован-->
             <form th:method="DELETE" th:action="@{'/apartment/' + ${apt.id}}">
-                <input type="submit" value="Видалити">
+                <input type="submit" value="Delete apartment">
             </form>
             <!--            <a th:href="@{'/apartment/delete/' + ${apt.id}}">Видалити</a>-->
         <!--    <jstl:choose>-->

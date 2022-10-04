@@ -7,15 +7,15 @@
     </head>
     <body>
         <div class="content">
-            <a class="btn" href="/main">Головна сторінка</a>
+            <a class="btn" href="/main">Main page</a>
             <form th:method="PATCH" th:action="@{'/apartment/' + ${apt.id}}" th:object="${apartment}">
                 <p>Name: <input type="text" name="newName" th:value="*{getName()}" th:field="*{name}"
-                                placeholder="Заголовок" size="150 "/></p>
-                <p>Keywords: <input type="text" name="newKeywords" th:value="*{getKeywordsInString()}"
-                                    th:field="*{keywordsInString}" placeholder="Параметри (через кому)" size="150"/></p>
+                                placeholder="Name of the apartment" size="150 "/></p>
+                <p>Features: <input type="text" name="newKeywords" th:value="*{getKeywordsInString()}"
+                                    th:field="*{keywordsInString}" placeholder="Features (split by ', ')" size="150"/></p>
                 <p>Description: <textarea name="newDescription" th:field="*{description}"
-                                          cols="150" rows="15" placeholder="Інформація"></textarea></p>
-                <input type="submit" value="Редагувати"/>
+                                          cols="150" rows="15" placeholder="Information about apartment"></textarea></p>
+                <input type="submit" value="Edit"/>
             </form>
         </div>
     </body>

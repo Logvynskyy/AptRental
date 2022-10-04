@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class="content">
-            <a class="btn" href="/main">Головна сторінка</a>
+            <a class="btn" href="/main">Main page</a>
             <form enctype="multipart/form-data" th:action="@{/saveApartment}" th:object="${apartment}" method="post">
                 <p>Name: <input type="text" th:field="*{name}" /></p>
                 <p>Keywords: <input type="text" th:field="*{keywordsInString}" /></p>

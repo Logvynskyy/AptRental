@@ -35,9 +35,9 @@
 <!--    </jstl:choose>-->
 <!--        <div sec:authorize="isAuthenticated()">-->
             <p th:inline="text">[[${#httpServletRequest.remoteUser}]],
-                <a href="/logout" class="exit">Вихід</a>
+                <a href="/logout" class="exit">Logout</a>
             </p>
-            <p>Список ваших квартир</p>
+            <p>Your apartments</p>
             <div th:each="apt: ${list}">
                 <p><a th:href="@{'/apartment/' + ${apt.id}}"><span th:utext="${apt.getName()}"></span></a></p>
             </div>
