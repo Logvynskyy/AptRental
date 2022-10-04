@@ -26,7 +26,7 @@ public class UsersController {
 
         if (!userService.saveUser(user)){
             modelAndView = new ModelAndView("registration", "user", new User());
-            modelAndView.addObject("usernameError", "Пользователь с таким именем уже существует");
+            modelAndView.addObject("usernameError", "User with this name is already present");
             return modelAndView;
         }
 

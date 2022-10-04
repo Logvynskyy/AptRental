@@ -1,17 +1,16 @@
 package com.logvynskyy.aptrental.dao;
 
 import com.logvynskyy.aptrental.entities.Apartment;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@Component
+@Repository
 public class ApartmentDAO {
     private List<Apartment> apartmentList = new ArrayList<>();
     private static int counter = 0;
 
-    public List<Apartment> getAllApartments(){
+    public List<Apartment> getApartmentList() {
         return apartmentList;
     }
 

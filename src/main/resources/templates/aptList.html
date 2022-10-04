@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div class="content">
+        <a class="btn" href="/">Home page</a>
+        <div th:each="apt: ${list}">
+            <p><a th:href="@{'/apartment/' + ${apt.id}}"><span th:utext="${apt.getName()}"></span></a></p>
+        </div>
+    </div>
+</body>
+</html>
