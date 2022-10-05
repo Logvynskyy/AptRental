@@ -7,10 +7,11 @@
 </head>
 <body>
     <div class="content">
-        <a class="btn" href="/">Home page</a>
+        <a class="btn" href="/search">Back to the searching menu</a>
         <div th:each="apt: ${list}">
             <p><a th:href="@{'/apartment/' + ${apt.id}}"><span th:utext="${apt.getName()}"></span></a></p>
         </div>
+        <a class="red" href="/">Home page</a>
     </div>
 </body>
 </html>

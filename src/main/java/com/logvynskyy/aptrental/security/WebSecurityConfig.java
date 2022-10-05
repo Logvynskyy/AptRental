@@ -65,10 +65,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                     //Доступ только для не зарегистрированных пользователей
-                    .antMatchers("/registration").not().fullyAuthenticated()
+                    .antMatchers("/", "/registration").not().fullyAuthenticated()
                     .antMatchers("/addApartment", "/editApartment", "/apartment", "/main").fullyAuthenticated()
                     //Доступ разрешен всем пользователей
-                    .antMatchers("/").permitAll()
+                    //.antMatchers("/").permitAll()
                 .and()
                     .formLogin()
                     .defaultSuccessUrl("/main")

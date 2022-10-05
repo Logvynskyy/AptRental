@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Searching</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+    <div class="content">
+        <span th:utext="${error}"></span>
+        <form action="/search/request" method="GET">
+            <input type="text" name="query" placeholder="Enter desired features"/>
+            <input type="submit" class="btn" value="Search"/>
+            <input type="reset" value="Reset"/>
+        </form>
+    </div>
+</body>
+</html>

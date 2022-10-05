@@ -10,8 +10,8 @@ import java.util.*;
 public class ApartmentService {
     private final List<Apartment> apartmentList;
 
-    public ApartmentService(ApartmentDAO apartmentList) {
-        this.apartmentList = apartmentList.getApartmentList();
+    public ApartmentService(ApartmentDAO apartmentDAO) {
+        this.apartmentList = apartmentDAO.getApartmentList();
     }
 
     public List<Apartment> getAllApartments(){
