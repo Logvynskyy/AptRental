@@ -3,6 +3,7 @@ package com.logvynskyy.aptrental.controllers;
 import com.logvynskyy.aptrental.entities.Apartment;
 import com.logvynskyy.aptrental.dao.ApartmentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,6 +26,7 @@ public class ApartmentOperationsController {
     }
 
     @GetMapping("edit/{id}")
+//    @PreAuthorize("authentication.principal.username.equals(#apartmentDAO.apartmentList.get({id}).owner)")
     public ModelAndView editApartment(@PathVariable int id){
         ModelAndView modelAndView = new ModelAndView("editApartment", "apartment", apartmentDAO.getApartment(id));
         modelAndView.addObject("apt", apartmentDAO.getApartment(id));

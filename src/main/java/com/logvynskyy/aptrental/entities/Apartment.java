@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.HashSet;
 
 public class Apartment {
-//    private User owner;
+    private String owner;
     private int id;
     private String name;
     private String description;
@@ -33,13 +33,13 @@ public class Apartment {
         this.id = id;
     }
 
-    //    public User getOwner() {
-//        return owner;
-//    }
-//
-//    public void setOwner(User owner) {
-//        this.owner = owner;
-//    }
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     public String getName() {
         return name;

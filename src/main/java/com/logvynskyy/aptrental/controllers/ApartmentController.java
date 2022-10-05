@@ -5,6 +5,8 @@ import com.logvynskyy.aptrental.dao.ApartmentDAO;
 import com.logvynskyy.aptrental.dao.ImageDAO;
 import com.logvynskyy.aptrental.services.ApartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,12 +37,13 @@ public class ApartmentController {
     }
 
     @PostMapping("/saveApartment")
-    public ModelAndView saveApartment(@ModelAttribute Apartment apartment){
-//        User user = (User) request.getSession().getAttribute("user");
+    public ModelAndView saveApartment(@ModelAttribute Apartment apartment){ //, @AuthenticationPrincipal User us){
+//        String user = us.getUsername();
+//        System.out.println(us.getUsername());
         String[] keywordsArr = apartment.getKeywordsInString().split("[,?\\s*]");
         HashSet<String> keywordSet = new HashSet<>(Arrays.asList(keywordsArr));
 
-//        apt.setOwner(user);
+//        apartment.setOwner(user);
         apartment.setKeywords(keywordSet);
         apartmentDAO.addApartment(apartment);
         imageDAO.uploadImage(apartment.getFiles());
